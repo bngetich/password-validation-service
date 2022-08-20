@@ -1,21 +1,28 @@
 package com.example.password.validator.components;
 
-import java.util.List;
+import com.example.password.validator.PasswordValidator;
 
-public class PasswordHasNumberComponent extends PasswordRuleComponentDecorator {
+/**
+ * PasswordValidatorDecorator that adds checking for at least one numeric character.
+ */
+public class PasswordHasNumberComponent extends PasswordValidatorComponentDecorator {
 
     public static final String ERROR_STRING = "Password must contain at least one numeric character";
 
-    public static final String REGEX = "(?=.*[0-9])";
+    public static final String REGEX = "(.*[0-9].*)";
 
-    public PasswordHasNumberComponent(PasswordRuleComponent passwordRuleComponent) {
-        super(passwordRuleComponent);
+    public PasswordHasNumberComponent(PasswordValidatorComponent passwordValidatorComponent) {
+        super(passwordValidatorComponent);
     }
 
     @Override
-    public String isPasswordValid(String password) {
+    public void isPasswordValid(String password) {
+        super.isPasswordValid(password);
+        System.out.println(PasswordHasNumberComponent.class.toString());
         boolean isValid = password.matches(REGEX);
 
-        return isValid ? new String("") : ERROR_STRING;
+        if(!isValid){
+            PasswordValidator.validationResults.add(ERROR_STRING);
+        }
     }
 }

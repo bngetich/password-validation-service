@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class PasswordValidatorController {
 
@@ -15,10 +17,10 @@ public class PasswordValidatorController {
     private PasswordValidatorBundle passwordValidatorBundle;
 
     @RequestMapping("/validator")
-    public String validator(@RequestParam(value="password") String password) {
+    public List<String> validator(@RequestParam(value="password") String password) {
         PasswordValidator passwordValidator = new PasswordValidator(passwordValidatorBundle);
 
-        String validatorResults = passwordValidator.validate(password);
+        List<String> validatorResults = passwordValidator.validate(password);
 
         return validatorResults;
     }
