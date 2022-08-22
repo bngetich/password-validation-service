@@ -1,6 +1,6 @@
 package com.example.password.validator.components;
 
-import com.example.password.validator.PasswordValidator;
+import com.example.password.validator.service.PasswordValidatorService;
 
 /**
  * Component that adds validation check for empty password. Is also the base/concrete component class(Decorator Pattern)
@@ -11,11 +11,10 @@ public class PasswordNotEmptyComponent implements PasswordValidatorComponent {
 
     @Override
     public void isPasswordValid(String password) {
-        System.out.println(PasswordNotEmptyComponent.class.toString());
         boolean isValid = !password.isEmpty();
 
         if(!isValid){
-            PasswordValidator.validationResults.add(ERROR_STRING);
+            PasswordValidatorService.validationResults.add(ERROR_STRING);
         }
     }
 

@@ -1,6 +1,6 @@
 package com.example.password.validator.components;
 
-import com.example.password.validator.PasswordValidator;
+import com.example.password.validator.service.PasswordValidatorService;
 
 /**
  * PasswordValidatorDecorator that adds checking for at least one numeric character.
@@ -18,11 +18,10 @@ public class PasswordHasNumberComponent extends PasswordValidatorComponentDecora
     @Override
     public void isPasswordValid(String password) {
         super.isPasswordValid(password);
-        System.out.println(PasswordHasNumberComponent.class.toString());
         boolean isValid = password.matches(REGEX);
 
         if(!isValid){
-            PasswordValidator.validationResults.add(ERROR_STRING);
+            PasswordValidatorService.validationResults.add(ERROR_STRING);
         }
     }
 }

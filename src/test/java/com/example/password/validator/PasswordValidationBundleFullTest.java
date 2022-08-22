@@ -1,7 +1,8 @@
 package com.example.password.validator;
 
-import com.example.password.validator.bundles.PasswordValidatorBundle_Full;
+import com.example.password.validator.service.PasswordValidatorService;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -11,16 +12,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class PasswordValidationBundleFullTest {
 
-    private final PasswordValidatorBundle_Full fullValidatorBundle = new PasswordValidatorBundle_Full();
+    @Autowired
+    private PasswordValidatorService passwordValidatorService;
 
-    private final PasswordValidator passwordValidator = new PasswordValidator(fullValidatorBundle);
     @Test
     void should_test_invalid_length(){
         //given
         String passwordTooShort = "bk29";
 
         //when
-        List<String> validatorResult = passwordValidator.validate(passwordTooShort);
+        List<String> validatorResult = passwordValidatorService.validate(passwordTooShort);
 
         //then
         assertTrue(validatorResult.contains("Password must be between 5 and 12 characters in length"));
@@ -33,7 +34,7 @@ public class PasswordValidationBundleFullTest {
         String passwordMissingLowerCase = "BK2384";
 
         //when
-        List<String> validatorResult = passwordValidator.validate(passwordMissingLowerCase);
+        List<String> validatorResult = passwordValidatorService.validate(passwordMissingLowerCase);
 
         //then
         assertTrue(validatorResult.contains("Password must contain at least one lowercase character"));
@@ -46,7 +47,7 @@ public class PasswordValidationBundleFullTest {
         String passwordMissingNumber = "BKndjsd";
 
         //when
-        List<String> validatorResult = passwordValidator.validate(passwordMissingNumber);
+        List<String> validatorResult = passwordValidatorService.validate(passwordMissingNumber);
 
         //then
         assertTrue(validatorResult.contains("Password must contain at least one numeric character"));
@@ -59,7 +60,7 @@ public class PasswordValidationBundleFullTest {
         String passwordInvalidCharacterSequence = "bkn123123";
 
         //when
-        List<String> validatorResult = passwordValidator.validate(passwordInvalidCharacterSequence);
+        List<String> validatorResult = passwordValidatorService.validate(passwordInvalidCharacterSequence);
 
         //then
         assertTrue(validatorResult.contains("Password must not contain any sequence of characters immediately followed by the same sequence"));

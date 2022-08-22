@@ -1,6 +1,6 @@
 package com.example.password.validator.components;
 
-import com.example.password.validator.PasswordValidator;
+import com.example.password.validator.service.PasswordValidatorService;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,7 +21,6 @@ public class PasswordHasNoRepeatSequenceComponent extends PasswordValidatorCompo
     @Override
     public void isPasswordValid(String password) {
         super.isPasswordValid(password);
-        System.out.println(PasswordHasNoRepeatSequenceComponent.class.toString());
 
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(password);
@@ -29,7 +28,7 @@ public class PasswordHasNoRepeatSequenceComponent extends PasswordValidatorCompo
         boolean isValid = !matcher.find();
 
         if(!isValid){
-            PasswordValidator.validationResults.add(ERROR_STRING);
+            PasswordValidatorService.validationResults.add(ERROR_STRING);
         }
     }
 }

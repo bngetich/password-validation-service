@@ -1,6 +1,6 @@
 package com.example.password.validator.components;
 
-import com.example.password.validator.PasswordValidator;
+import com.example.password.validator.service.PasswordValidatorService;
 
 /**
  * PasswordValidatorComponentDecorator that adds validation check for min/max password length
@@ -15,11 +15,10 @@ public class PasswordHasCorrectLengthComponent extends PasswordValidatorComponen
     @Override
     public void isPasswordValid(String password) {
         super.isPasswordValid(password);
-        System.out.println(PasswordHasCorrectLengthComponent.class.toString());
         boolean isValid = (password.length() >= 5) & (password.length() <= 12);
 
         if(!isValid){
-            PasswordValidator.validationResults.add(ERROR_STRING);
+            PasswordValidatorService.validationResults.add(ERROR_STRING);
         }
 
     }
