@@ -16,13 +16,13 @@ import java.util.List;
 public abstract class PasswordValidatorBundle {
 
     private final PasswordValidatorComponent passwordValidatorComponent;
-    public final List<Class<? extends PasswordValidatorComponentDecorator>> passwordRuleDecoratorList;
+    public final List<Class<? extends PasswordValidatorComponentDecorator>> passwordValidatorDecoratorList;
 
     protected PasswordValidatorBundle(List<Class<? extends PasswordValidatorComponentDecorator>> passwordRuleDecoratorList) {
         PasswordValidatorComponent passwordValidatorComponent = new PasswordNotEmptyComponent(); //concrete component
-        this.passwordRuleDecoratorList = passwordRuleDecoratorList;
+        this.passwordValidatorDecoratorList = passwordRuleDecoratorList;
 
-        for (Class<? extends PasswordValidatorComponentDecorator> passwordRuleDecoratorClazz : this.passwordRuleDecoratorList){
+        for (Class<? extends PasswordValidatorComponentDecorator> passwordRuleDecoratorClazz : this.passwordValidatorDecoratorList){
 
             try{
                 passwordValidatorComponent = passwordRuleDecoratorClazz.getConstructor(PasswordValidatorComponent.class)

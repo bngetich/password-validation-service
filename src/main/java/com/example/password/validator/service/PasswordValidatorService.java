@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Service that performs password validation. Can be injected.
+ * Service that performs password validation. Injected to the controller to call its validate method.
  * Prototype scoped, so we get a new instance everytime with new validation results array. (don't know if this is the right design)
  */
 @Service

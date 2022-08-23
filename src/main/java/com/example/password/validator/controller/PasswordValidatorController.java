@@ -11,10 +11,11 @@ import java.util.List;
 
 
 /**
- * Has the /validator endpoint and injects our password validator service
+ * Has the /validator endpoint and injects our password validator service.
+ * Request scoped meaning with each request a new controller instance is created.
  */
 @RestController
-@Scope("prototype")
+@Scope("request")
 public class PasswordValidatorController {
 
     @Autowired
@@ -23,7 +24,6 @@ public class PasswordValidatorController {
     @RequestMapping("/validator")
     public List<String> validator(@RequestParam(value="password") String password) {
         List<String> validatorResults = passwordValidatorService.validate(password);
-        System.out.println(this.hashCode());
         return validatorResults;
     }
 
